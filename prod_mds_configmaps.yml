@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mds-host-configmaps
+  namespace: cloudnative-webapp-mds
+data:
+  mds-host: "10.0.10.169"

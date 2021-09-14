@@ -1,0 +1,13 @@
+{
+    "defaults": {
+        "timeout": 10000,
+        "chromeLaunchConfig": {
+            "args": [
+                "--no-sandbox"
+            ]
+        }
+    },
+    "urls": [
+        "http://172.17.0.4:5000"
+    ]
+}

@@ -1,0 +1,96 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+    name: cloudnative-webapp-mds
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: php
+  namespace: cloudnative-webapp-mds
+  labels:
+    tier: app
+spec:
+  ports:
+  - port: 9000
+    protocol: TCP
+  selector:
+    app: php
+    tier: app
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: cloudnative-webapp-mds
+  labels:
+    tier: web
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 5000
+  selector:
+    app: nginx
+    tier: web
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php
+  namespace: cloudnative-webapp-mds
+  labels:
+    tier: app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: php
+      tier: app
+  template:
+    metadata:
+      labels:
+        app: php
+        tier: app
+    spec:
+      containers:
+      - name: php
+        image: lhr.ocir.io/apaccpt01/php-webapp-mds:${BUILDRUN_HASH}
+        ports:
+        - containerPort: 9000
+        env:
+        - name: MDS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mds-host-configmaps
+              key: mds-host
+      imagePullSecrets:
+      - name: ocir-secret
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: cloudnative-webapp-mds
+  labels:
+    tier: web
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+      tier: web
+  template:
+    metadata:
+      labels:
+        app: nginx
+        tier: web
+    spec:
+      containers:
+      - name: nginx
+        image: lhr.ocir.io/apaccpt01/nginx-php-mds:${BUILDRUN_HASH}
+        ports:
+        - containerPort: 5000
+      imagePullSecrets:
+      - name: ocir-secret
+---

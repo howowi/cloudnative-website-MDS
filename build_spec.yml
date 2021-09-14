@@ -1,0 +1,97 @@
+version: 0.1
+component: build
+timeoutInSeconds: 10000
+runAs: root
+shell: bash
+env:
+  exportedVariables:
+    - BUILDRUN_HASH
+  vaultVariables:
+    OCIRCRED: "ocid1.vaultsecret.oc1.uk-london-1.amaaaaaay5l3z3ya74cfujmsgyeqpyyojowtsoiaqrniuvjxx67hw2cu43sa"
+
+steps:
+  - type: Command
+    name: "Export BUILDRUN_HASH as variable"
+    timeoutInSeconds: 40
+    command: |
+      export BUILDRUN_HASH=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-7`
+      echo "BUILDRUN_HASH: " $BUILDRUN_HASH
+    onFailure:
+      - type: Command
+        command: |
+          echo "Failed to obtain BUILDRUN_HASH"
+        timeoutInSeconds: 400
+        runAs: root
+
+  - type: Command
+    name: "Build Docker image for php"
+    command: |
+      docker build -t lhr.ocir.io/apaccpt01/php-webapp:${BUILDRUN_HASH} php/.
+      echo "Run PHP"
+      docker run -dit -p 9000:9000 --name php lhr.ocir.io/apaccpt01/php-webapp:${BUILDRUN_HASH}
+      echo "Run php-webapp successfully"
+    onFailure:
+      - type: Command
+        command: |
+          echo "Failed to build Docker container for php"
+        timeoutInSeconds: 400
+        runAs: root
+  
+  - type: Command
+    name: "Build Docker image for nginx"
+    command: |
+      docker build -t lhr.ocir.io/apaccpt01/nginx-php:${BUILDRUN_HASH} nginx/.
+      echo "Run nginx-php"
+      docker run -dit -p 5000:5000 --name nginx-php --add-host=php:172.17.0.3 lhr.ocir.io/apaccpt01/nginx-php:${BUILDRUN_HASH}
+      # echo "Run nginx-php successfully"
+    onFailure:
+      - type: Command
+        command: |
+          echo "Failed to build Docker container for nginx"
+        timeoutInSeconds: 400
+        runAs: root
+  
+  - type: Command
+    name: "Build Pa11y CI Container for web accessibility testing"
+    command: |
+      echo "Build Pa11y CI image"
+      docker build -t pally-test:latest pa11y-test/.
+      echo "Pa11y CI build completed"
+    onFailure:
+      - type: Command
+        command: |
+          echo "Failed to build Docker container for Pa11y"
+        timeoutInSeconds: 400
+        runAs: root
+
+  - type: Command
+    name: "Execute accessibility test"
+    command: |
+      docker ps -a
+      docker logs nginx-php
+      docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx-php
+      docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' php
+      echo "Execute Pa11y test"
+      docker run pally-test
+    onFailure:
+      - type: Command
+        command: |
+          echo "Accessibility Test Failed"
+        timeoutInSeconds: 400
+        runAs: root
+
+  - type: Command
+    name: "Push Nginx and PHP Docker Image to OCIR"
+    command: |
+      echo "Login to OCIR"
+      docker login lhr.ocir.io -u apaccpt01/howie_iam -p ${OCIRCRED}
+      echo "Push Nginx image to OCIR"
+      docker push lhr.ocir.io/apaccpt01/nginx-php:${BUILDRUN_HASH}
+      echo "Push PHP image to OCIR"
+      docker push lhr.ocir.io/apaccpt01/php-webapp:${BUILDRUN_HASH}
+    onFailure:
+      - type: Command
+        command: |
+          echo "Failed to push images $BUILDRUN_HASH to OCIR"
+        timeoutInSeconds: 400
+        runAs: root
