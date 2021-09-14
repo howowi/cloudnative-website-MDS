@@ -110,6 +110,6 @@ Message : <textarea name="user_text" aria-label="message"></textarea><br />
             &copy; Oracle. 2021
         </div>
 <p id="php_version"> <?php echo 'Current PHP version: ' . phpversion(); ?> </p>
-<p id="version"> Current web version 1.5 </p>
+<p id="version"> Current web version 1.0 </p>
 </body>
 </html>
