@@ -71,9 +71,9 @@ div.check {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {//Check it is comming from a form
 
-    $database ="webappdb";  
-    $user = "mds-user";  
-    $password = "P@ssw0rd2021";  
+    $database = $_ENV["MDS_DATABASE"];  
+    $user = $_ENV["MDS_USER"];  
+    $password = $_ENV["MDS_PASSWORD"];  
     $host = $_ENV["MDS_HOST"];
 
 	$u_name = filter_var($_POST["user_name"], FILTER_SANITIZE_STRING); //set PHP variables like this so we can use them anywhere in code below

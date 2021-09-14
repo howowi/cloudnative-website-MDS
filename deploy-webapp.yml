@@ -64,6 +64,21 @@ spec:
             configMapKeyRef:
               name: mds-host-configmaps
               key: mds-host
+        - name: MDS_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mds-secret
+              key: mds-database
+        - name: MDS_USER
+          valueFrom:
+            secretKeyRef:
+              name: mds-secret
+              key: mds-user
+        - name: MDS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mds-secret
+              key: mds-password
       imagePullSecrets:
       - name: ocir-secret
 ---
