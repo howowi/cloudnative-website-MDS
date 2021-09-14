@@ -72,7 +72,7 @@ div.check {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {//Check it is comming from a form
 
     $database ="webappdb";  
-    $user = "mds-user";  
+    $user = "php-user";  
     $password = "P@ssw0rd2021";  
     $host = $_ENV["MDS_HOST"];
 
