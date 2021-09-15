@@ -15,7 +15,13 @@ This pattern shows how to deploy a cloud native website on Oracle Cloud Infrastr
 
 OCI provides one-click cluster deployment and will take care of creation of VCN, subnets, security list, Kubernetes Master and Worker Nodes.
 
-## **2. Set up OCI DevOps CICD Pipeline**
+## **2. Deploy MySQL Database Service**
+
+```
+Steps Here
+```
+
+## **3. Set up OCI DevOps CICD Pipeline**
 
 ### a. Create Project
 ```
@@ -46,7 +52,7 @@ Steps Here
 Steps Here
 ```
 
-## **3. Trigger CICD Pipeline** 
+## **4. Trigger CICD Pipeline** 
 ```
 Steps Here
 ```
