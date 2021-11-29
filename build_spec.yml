@@ -42,7 +42,7 @@ steps:
     command: |
       docker build -t lhr.ocir.io/apaccpt01/nginx-php-mds:${BUILDRUN_HASH} nginx/.
       echo "Run nginx-php"
-      docker run -dit -p 5000:5000 --name nginx-php --add-host=php:172.17.0.3 lhr.ocir.io/apaccpt01/nginx-php-mds:${BUILDRUN_HASH}
+      docker run -dit -p 5000:5000 --name nginx-php --add-host=php:172.17.0.2 lhr.ocir.io/apaccpt01/nginx-php-mds:${BUILDRUN_HASH}
       # echo "Run nginx-php successfully"
     onFailure:
       - type: Command
