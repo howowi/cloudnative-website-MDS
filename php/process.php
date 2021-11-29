@@ -128,6 +128,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//Check it is comming from a form
         echo "<td>" . $employee_id . "</td>";
         echo "</tr>";
         echo "</table>";
+        echo "</br>";
+        echo "</br>";
 	}
     else{
 		echo "Something went wrong";
