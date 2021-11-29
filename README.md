@@ -56,3 +56,61 @@ Steps Here
 ```
 Steps Here
 ```
+
+## **PHP to MDS Integration Steps**
+1. Access MDS host using Bastion
+
+    a. Create Bastion session to MDS host
+
+    b. Create port forwarding using Bastion
+    ```
+    ssh -i <privateKey> -N -L <localPort>:10.0.10.79:3306 -p 22 ocid1.bastionsession.oc1.uk-london-1.amaaaaaay5l3z3yadxxhqb2uyivjxudpvdielpfx6bsejxe2oz25wypxx7fq@host.bastion.uk-london-1.oci.oraclecloud.com
+    ```
+    c. Install mysql shell from https://dev.mysql.com/downloads/shell/
+
+    d. Connect to MDS host
+    ```
+    mysqlsh -h 127.0.0.1 -p '<MDS password>' -u <MDS user>
+    ```
+    e. Create database. Switch to SQL mode by entering \sql.
+    ```sql
+    \sql
+    CREATE DATABASE webappdb;
+    ```
+    f. List all databases
+    ```sql
+    show databases;
+    +--------------------+
+    | Database           |
+    +--------------------+
+    | information_schema |
+    | mysql              |
+    | performance_schema |
+    | sys                |
+    | webappdb           |
+    +--------------------+
+    ```
+
+2. Create db schema in MDS
+    a. Switch to the right database.
+    ```sql
+    use webappdb;
+    ```
+    a. Insert the following SQL statement in mysql shell to create table.
+    ```sql
+    CREATE TABLE `employee_data`(
+    `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `first_name` VARCHAR(50) NOT NULL,
+    `last_name` VARCHAR(50) NOT NULL,
+    `gender` VARCHAR(50) NOT NULL,
+    `email` VARCHAR(50) NOT NULL,
+    `hire_date` VARCHAR(50) NOT NULL,
+    `department` VARCHAR(50) NOT NULL,
+    `job` VARCHAR(50) NOT NULL,
+    `salary` DECIMAL(10,2) NOT NULL
+    )AUTO_INCREMENT=1;
+    ```
+    b. Check the tables
+    ```sql
+    show tables;
+    ```
