@@ -92,15 +92,25 @@ Steps Here
     ```
 
 2. Create db schema in MDS
-```sql
-CREATE TABLE `employee_data`(
- `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
- `first_name` VARCHAR(50) NOT NULL,
- `last_name` VARCHAR(50) NOT NULL,
- `email` VARCHAR(50) NOT NULL,
- `hire_date` VARCHAR(50) NOT NULL,
- `department` VARCHAR(50) NOT NULL,
- `job` VARCHAR(50) NOT NULL,
- `salary` DECIMAL(10,2) NOT NULL
-)AUTO_INCREMENT=1;
-```
+    a. Switch to the right database by executing the following SQL statement.
+    ```sql
+    use webappdb;
+    ```
+    a. Insert the following SQL statement in mysql shell to create table.
+    ```sql
+    CREATE TABLE `employee_data`(
+    `id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `first_name` VARCHAR(50) NOT NULL,
+    `last_name` VARCHAR(50) NOT NULL,
+    `gender` VARCHAR(50) NOT NULL,
+    `email` VARCHAR(50) NOT NULL,
+    `hire_date` VARCHAR(50) NOT NULL,
+    `department` VARCHAR(50) NOT NULL,
+    `job` VARCHAR(50) NOT NULL,
+    `salary` DECIMAL(10,2) NOT NULL
+    )AUTO_INCREMENT=1;
+    ```
+    b. Check the tables
+    ```sql
+    show tables;
+    ```
