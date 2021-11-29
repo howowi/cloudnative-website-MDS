@@ -99,6 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//Check it is comming from a form
 	$statement->bind_param('sssssssd', $first_name ,$last_name ,$gender ,$email ,$hire_date ,$department ,$job ,$salary); //bind values and execute insert query
 	
 	if($statement->execute()){
+        $employee_id = $conn->insert_id;
 		echo "Employee details below have been registered successfully";
         echo "</br>";
         echo "</br>";
