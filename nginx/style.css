@@ -15,6 +15,14 @@ div.info {
     margin-top: 30px;
 }
 
+div.result_page_1 {
+    text-align: center;
+}
+
+div.result_page_2 {
+    text-align: center;
+}
+
 img {
     width: 176px;
     margin: 36px auto 36px auto;
