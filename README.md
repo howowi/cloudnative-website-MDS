@@ -72,14 +72,14 @@ Steps Here
     ```
     mysqlsh -h 127.0.0.1 -p '<MDS password>' -u <MDS user>
     ```
-    e. Create database. Switch to SQL mode by entering \sql before entering SQL statement.
-    ```
-    MySQL  127.0.0.1:3306 ssl  JS > \sql
+    e. Create database. Switch to SQL mode by entering \sql.
+    ```sql
+    \sql
     CREATE DATABASE webappdb;
     ```
     f. List all databases
-    ```
-    MySQL  127.0.0.1:3306 ssl  SQL > show databases;
+    ```sql
+    show databases;
     +--------------------+
     | Database           |
     +--------------------+
@@ -92,7 +92,7 @@ Steps Here
     ```
 
 2. Create db schema in MDS
-    a. Switch to the right database by executing the following SQL statement.
+    a. Switch to the right database.
     ```sql
     use webappdb;
     ```
