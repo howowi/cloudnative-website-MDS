@@ -100,7 +100,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//Check it is comming from a form
 	
 	if($statement->execute()){
         $employee_id = $conn->insert_id;
-		echo "Employee details below have been registered successfully";
+		echo "<div class="result_page_1"> Employee details below have been registered successfully </div>";
         echo "</br>";
         echo "</br>";
         echo "<table>";
@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {//Check it is comming from a form
 }
 ?>
 
-<p> Go <a href="/index.php"> back </a> to main page </p>
+<div class="result_page_2"> Go <a href="/index.php"> back </a> to main page </div>
 
 <div id="center">
 <p> &copy; Oracle. 2021 </p>
