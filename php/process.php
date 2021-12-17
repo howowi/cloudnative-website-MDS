@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Oracle Employee Registration Form</title>
+<title>MDS Heatwave Demo</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 <a href="/index.php">
 <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAAdCAYAAAA3i0VNAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAbGVYSWZNTQAqAAAACAAEARIAAwAAAAEAAQAAARoABQAAAAEAAAA+ARsABQAAAAEAAABGh2kABAAAAAEAAABOAAAAAAAAAEgAAAABAAAASAAAAAEAAqACAAQAAAABAAAAKaADAAQAAAABAAAAHQAAAAASjVVhAAAACXBIWXMAAAsTAAALEwEAmpwYAAACMmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNi4wLjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczpleGlmPSJodHRwOi8vbnMuYWRvYmUuY29tL2V4aWYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iPgogICAgICAgICA8ZXhpZjpQaXhlbFlEaW1lbnNpb24+NTgwPC9leGlmOlBpeGVsWURpbWVuc2lvbj4KICAgICAgICAgPGV4aWY6Q29sb3JTcGFjZT4xPC9leGlmOkNvbG9yU3BhY2U+CiAgICAgICAgIDxleGlmOlBpeGVsWERpbWVuc2lvbj44MjE8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8dGlmZjpPcmllbnRhdGlvbj4xPC90aWZmOk9yaWVudGF0aW9uPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KcEUlAgAABXtJREFUWAm1WE1oXFUUPue9SVLFpphMjE0msaEjLoJGCYrGRbU7XShWEbvwBxfFRVYK4kb8WSkUEYqCGxcWF0GQdONCsNSCKOKIf1XEFGJ+/JtMSpVWO533jt93731jkiY1eZM55L77e8757rnnnnsmKpsgE4lE7kL5S0Uq6LZK45mcFI20JWlAE9voaGdLQi7DDPlq5XIX68ss23jSZLRT5VQ9Y7a+UlksvkEk2S2mXdn4FmviOSeazIl2/KDV2d/IH0DGQNpYT94lOwgMESYS27Nnh5xrHILgg5A0JqpX/M+m19Oxzhi0iNUg8xOUt7U2f4yLTMY7VCoX1zKsAgnWGAvoJ2a9pQcA6nXRaNgxmRPMnbKwk5eosxOy4eNsQpTZSdjkkC798uN6QJsgsZTWc05sxeFXIeTZICCBJB47gV2JcVQtkhn1/A2JHcBZgCEisTRB/yFYdXot0KbGDKT1DR0RjSclTWgxzkOgdvgtpBT+M8qfKCTOE3xGmTyOrW0bVkYYLWKju91mnbjsZKCDHGn6oNYW3l8J1AnKLgmOeFLi+AgW0i8KKAl2WcAuAcpek8imxeqnpVo9j7k8FMnOwV3SpTcC5BO4gI/7bRpPCxtT6IRfxTamvy98mwHVrGHXDO2Fzb7HYoYcWAxHojEBnkB9MLuJeZBtxGPF0j4Aew+A+4CNJ0ejIHLYp1qdmyAfkMMXpMIjZO95LCBAWhGLCTA5rkvzdxMgNwOGQigx6rwFMrwsXVr4GJFyAgDPAChPjr4JsHqHFYceQZ8U+VBz9cAwTH+AlgYBIPzD0mXpsoc54N2hchG+0QglQZ23QIYLMy7EaXVhBgqepB5QB0oIQYrQB7jQCUuCCvF+ANsJOP6yuBtsr+jiYs27w39B3a3fhg+Um8zO1mGWiDcaRvkIJ0nJtCYqu9P6rxvxA/ya3OYc2IUavCZp+g/605zanrfaS1r7BdBUymVajzTlq2BNul4jHeOYt6TICICScFnwVZmRav8sB0B+xre3/zvDp5sUV7wFHaYMx17OeJBm3eyAABF/JmdWPE/tBSk7vPyCLkP/2tC2i6A8SNVmIsFB0MoEgrZtPzXq1Jkdvden7qVrHvev7pjdlNvYsA0MFAOy9oIsnw0uV7jeRRXvXhqcbJEYwnHrNwEQYiODuF4r9dgFUxEmqG2kpk/avc7VfAKDEAhjpfIdNQeQyQncaPZp8gth8dMcwO1uYHlbgDKhZs5qPQNDUPToijgNfTYjte6vicCB1OXFz9D+PMQpPoUNtPch6j/D1ZjLXhc8o60BJr8vAHgqxN8ofgv6roIqBnJ1OEym3AagO2L6jglM6WFXexA+oGIMQJ8CUL40fGEIOMInex63WjNf5VNhWdaPtPAoQN3jDOMAME4nZwH1zYDH7yowpgB0DC/lfS6Y+6PHrhy0d0XTl/CE/ZQxtlpb7yBfucPIEW4BQGZBUIS0LUIQT9JJvEJvZMkPJ2ge/r5IrKfcLdGFr7AzBHe8Oh6ooU/LYpkdhyG/BEONfFumyGjJQdhxApBudvw+++F4XaIYVmwcReLxGJQ5bPjA6oF4hOg0rGewhN2cRBkJeSX9lm96l/OVJkfGmaOGsmA93lZKLAAgbnMyhazLZT9Y0vylsEplM/n1Fn0HoO53dvbZEQN+yFD8LtHPQ4RIvbwLsdu4TyhegAVfpkAscCfLNmkVSA5kfuDavaUD8Jvn0L7VCePgdhJdSuUDXMUXfSbu8Lj0caWaS0BykqZmjUkXPOECtyMQ7MfETRjuRzxjcpyPVM9DzhyYv4AdP9Q/5k9TEHS6nyvQSUtvnnj8m1+dbyXBBYD5BJALAhB8Rzt98RbOL81zQmbs/70yvjqh2EDwvxTERq2uHC9HAAAAAElFTkSuQmCC" rel="icon" type="image/png" />
@@ -20,88 +20,27 @@ function test_input($data) {
     return $data;
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {//Check it is comming from a form
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $database = $_ENV["MDS_DATABASE"];  
-    $user = $_ENV["MDS_USER"];  
-    $password = $_ENV["MDS_PASSWORD"];  
-    $host = $_ENV["MDS_HOST"];
+  $database = $_ENV["MDS_DATABASE"];  
+  $user = $_ENV["MDS_USER"];  
+  $password = $_ENV["MDS_PASSWORD"];  
+  $host = $_ENV["MDS_HOST"];
 
-    $first_name = $last_name = $gender = $email = $hire_date = $department = $job = $salary = "";
+  $sql_statement = "";
 
-	if (empty($_POST["first_name"])) {
-        die("First name is required");
-      } else {
-        $first_name = test_input($_POST["first_name"]);
-        // check if name only contains letters and whitespace
-        if (!preg_match("/^[a-zA-Z-' ]*$/",$first_name)) {
-          die("Only letters and white space allowed");
-        }
-      }
-  
-      if (empty($_POST["last_name"])) {
-          die("Last name is required");
-        } else {
-          $last_name = test_input($_POST["last_name"]);
-          // check if name only contains letters and whitespace
-          if (!preg_match("/^[a-zA-Z-' ]*$/",$last_name)) {
-            die("Only letters and white space allowed");
-          }
-        }
-      
-      if (empty($_POST["email"])) {
-        die("Email is required");
-      } else {
-        $email = test_input($_POST["email"]);
-        // check if e-mail address is well-formed
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-          die("Invalid email format");
-        }
-      }
-    
-      if (empty($_POST["gender"])) {
-        die("Gender is required");
-      } else {
-        $gender = test_input($_POST["gender"]);
-      }
-  
-      if (empty($_POST["hire_date"])) {
-          die("Hire Date is required");
-      } else {
-          $hire_date = test_input($_POST["hire_date"]);
-      }
-  
-      if (empty($_POST["department"])) {
-        die("Department is required");
-      } else {
-        $department = test_input($_POST["department"]);
-      }
-  
-      if (empty($_POST["job"])) {
-          die("Job is required");
-      } else {
-          $job = test_input($_POST["job"]);
-      }
-  
-      if (empty($_POST["salary"])) {
-          die("Salary is required");
-      } else {
-          $salary = test_input($_POST["salary"]);
-      }
+  if (empty($_POST["sql_statement"])) {
+    die("SQL statement is required");
+  } else {
+    $sql_statement = test_input($_POST["sql_statement"]);
+  }
+
+  $conn = new mysqli($host, $user, $password, $database);
+  if ($conn->connect_error) {
+  die('Error : ('. $conn->connect_errno .') '. $conn->connect_error);
 	
-    $conn = new mysqli($host, $user, $password, $database);
-    if ($conn->connect_error) {
-		die('Error : ('. $conn->connect_errno .') '. $conn->connect_error);
-	}
-
-    $statement = $conn->prepare("INSERT INTO employee_data (first_name ,last_name ,gender ,email ,hire_date ,department ,job ,salary) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"); //prepare sql insert query
-    
-    //bind parameters for markers, where (s = string, i = integer, d = double,  b = blob)
-	$statement->bind_param('sssssssd', $first_name ,$last_name ,$gender ,$email ,$hire_date ,$department ,$job ,$salary); //bind values and execute insert query
-	
-	if($statement->execute()){
-        $employee_id = $conn->insert_id;
-		echo "Employee details below have been registered successfully </div>";
+	if( $result = $conn->query($sql_statement, "MYSQLI_USE_RESULT")){
+	echo "Employee details below have been registered successfully </div>";
         echo "</br>";
         echo "</br>";
         echo "<table>";
