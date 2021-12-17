@@ -45,6 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	echo "SQL Query Result";
   echo "</br>";
   echo "$result->fetch_assoc()";
+  echo "</br>";
 	}
   else{
 	echo "Something went wrong";
