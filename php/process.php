@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "SQL Query Result";
     echo "</br>";
     echo "</br>";
-    echo "$result->fetch_all(MYSQLI_ASSOC)";
+    $result->fetch_all(MYSQLI_ASSOC);
     echo "</br>";
     echo "</br>";
 }
