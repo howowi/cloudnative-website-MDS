@@ -46,14 +46,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "SQL Query Result";
     echo "</br>";
     echo "</br>";
-    while ($row = $result->fetch_all()) {
+    while ($row = $result->fetch_row()) {
         printf("%s, %s, %s <br />", $row[0], $row[1], $row[2]);
     }
     $end = microtime(true);
     $difference = $end - $started;
+    $querytime = number_format($difference, 8);
     echo "</br>";
     echo "</br>";
-    echo "Query took $difference sec to complete";
+    echo "Query took $querytime sec to complete";
     echo "</br>";
     echo "</br>";
   }
