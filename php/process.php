@@ -50,11 +50,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         printf("%s, %s, %s <br />", $row[0], $row[1], $row[2]);
     }
     $end = microtime(true);
-    $difference = $end - $started;
+    $difference = ($end - $started)*1000;
     $querytime = number_format($difference, 8);
     echo "</br>";
     echo "</br>";
-    echo "Query took $querytime sec to complete";
+    echo "Query took $querytime msec to complete";
     echo "</br>";
     echo "</br>";
   }
