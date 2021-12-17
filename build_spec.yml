@@ -51,34 +51,34 @@ steps:
         timeoutInSeconds: 400
         runAs: root
   
-  - type: Command
-    name: "Build Pa11y CI Container for web accessibility testing"
-    command: |
-      echo "Build Pa11y CI image"
-      docker build -t pally-test:latest pa11y-test/.
-      echo "Pa11y CI build completed"
-    onFailure:
-      - type: Command
-        command: |
-          echo "Failed to build Docker container for Pa11y"
-        timeoutInSeconds: 400
-        runAs: root
+  # - type: Command
+  #   name: "Build Pa11y CI Container for web accessibility testing"
+  #   command: |
+  #     echo "Build Pa11y CI image"
+  #     docker build -t pally-test:latest pa11y-test/.
+  #     echo "Pa11y CI build completed"
+  #   onFailure:
+  #     - type: Command
+  #       command: |
+  #         echo "Failed to build Docker container for Pa11y"
+  #       timeoutInSeconds: 400
+  #       runAs: root
 
-  - type: Command
-    name: "Execute accessibility test"
-    command: |
-      docker ps -a
-      docker logs nginx-php
-      docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx-php
-      docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' php
-      echo "Execute Pa11y test"
-      docker run pally-test
-    onFailure:
-      - type: Command
-        command: |
-          echo "Accessibility Test Failed"
-        timeoutInSeconds: 400
-        runAs: root
+  # - type: Command
+  #   name: "Execute accessibility test"
+  #   command: |
+  #     docker ps -a
+  #     docker logs nginx-php
+  #     docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' nginx-php
+  #     docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' php
+  #     echo "Execute Pa11y test"
+  #     docker run pally-test
+  #   onFailure:
+  #     - type: Command
+  #       command: |
+  #         echo "Accessibility Test Failed"
+  #       timeoutInSeconds: 400
+  #       runAs: root
 
   - type: Command
     name: "Push Nginx and PHP Docker Image to OCIR"
