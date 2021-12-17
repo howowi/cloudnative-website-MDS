@@ -17,6 +17,13 @@ div.info {
 
 div.result_page_1 {
     text-align: center;
+    border-radius: 5px;
+    background-color: #f4f4f4;    
+    padding: 20px;
+    margin-bottom: 100px;
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 30px;
 }
 
 div.result_page_2 {
