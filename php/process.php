@@ -41,12 +41,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   die('Error : ('. $conn->connect_errno .') '. $conn->connect_error);
   }
 	
-	if( $result = $conn->query($sql_statement)){
-	echo "SQL Query Result";
-  echo "</br>";
-  echo "$result->fetch_all()";
-  echo "</br>";
-	}
+  if( $result = $conn->query($sql_statement)){
+    echo "SQL Query Result";
+    echo "</br>";
+    echo "</br>";
+    echo "$result->fetch_all(MYSQLI_ASSOC)";
+    echo "</br>";
+    echo "</br>";
+}
   else{
 	echo "Something went wrong";
   echo "</br>";
