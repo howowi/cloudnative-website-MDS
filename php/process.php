@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   die('Error : ('. $conn->connect_errno .') '. $conn->connect_error);
   }
 	
-	if( $result = $conn->query($sql_statement, "MYSQLI_USE_RESULT")){
+	if( $result = $conn->query($sql_statement)){
 	echo "SQL Query Result";
   echo "$result";
 	}
