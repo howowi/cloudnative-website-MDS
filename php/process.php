@@ -40,23 +40,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if ($conn->connect_error) {
   die('Error : ('. $conn->connect_errno .') '. $conn->connect_error);
   }
-	
+
+  $started = microtime(true);
   if( $result = $conn->query($sql_statement)){
     echo "SQL Query Result";
     echo "</br>";
     echo "</br>";
-    while ($row = $result->fetch_all(MYSQLI_ASSOC)) {
-        // printf("%s, %s, %s <br />", $row["id"], $row["first_name"], $row["last_name"]);
-        echo $row[1];
+    while ($row = $result->fetch_all()) {
+        printf("%s, %s, %s <br />", $row[0], $row[1], $row[2]);
     }
+    $end = microtime(true);
+    $difference = $end - $started;
     echo "</br>";
     echo "</br>";
-}
+    echo "Query took $difference sec to complete";
+    echo "</br>";
+    echo "</br>";
+  }
   else{
 	echo "Something went wrong";
-  echo "</br>";
-  print $conn->error; //show mysql error if any
-	}
+    echo "</br>";
+    print $conn->error; //show mysql error if any
+  }
 }
 ?>
 </div>
