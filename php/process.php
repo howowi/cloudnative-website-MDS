@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "</br>";
     echo "</br>";
     while ($row = $result->fetch_assoc()) {
-        printf("%s, %s, %s", $row[0], $row[1], $row[2]);
+        printf("%s, %s, %s <br />", $row["id"], $row["first_name"], $row["last_name"]);
     }
     echo "</br>";
     echo "</br>";
