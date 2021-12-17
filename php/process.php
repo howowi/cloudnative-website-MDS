@@ -43,7 +43,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
 	if( $result = $conn->query($sql_statement)){
 	echo "SQL Query Result";
-  echo "$result";
+  echo "</br>";
+  echo "$result->fetch_assoc()";
 	}
   else{
 	echo "Something went wrong";
