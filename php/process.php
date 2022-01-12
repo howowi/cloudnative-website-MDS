@@ -14,12 +14,12 @@
 <div class="result_page_1"> 
 <?php
 
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
+// function test_input($data) {
+//     $data = trim($data);
+//     $data = stripslashes($data);
+//     $data = htmlspecialchars($data);
+//     return $data;
+// }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -33,10 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["sql_statement"])) {
     die("SQL statement is required");
   } else {
-    $sql_statement = test_input($_POST["sql_statement"]);
+    // $sql_statement = test_input($_POST["sql_statement"]);
+    $sql_statement = $_POST["sql_statement"];
   }
 
-  $conn = new mysqli($host, $user, $password, $database);
+  // $conn = new mysqli($host, $user, $password, $database);
+  $conn =  mysqli_init();
+  $conn->options(MYSQLI_OPT_CONNECT_TIMEOUT, 20); #Connection timeout set to 20secs
+  $conn->options(MYSQLI_OPT_READ_TIMEOUT, 20); #Read timeout set to 20secs
+  $conn->real_connect($host, $user, $password, $database);
   if ($conn->connect_error) {
   die('Error : ('. $conn->connect_errno .') '. $conn->connect_error);
   }
