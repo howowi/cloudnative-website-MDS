@@ -1,0 +1,187 @@
+apiVersion: core.oam.dev/v1alpha2
+kind: Component
+metadata:
+  name: todo-domain
+spec:
+  workload:
+    apiVersion: oam.verrazzano.io/v1alpha1
+    kind: VerrazzanoWebLogicWorkload
+    spec:
+      template:
+        metadata:
+          name: todo-domain
+        spec:
+          adminServer:
+            adminChannelPortForwardingEnabled: true
+          domainUID: tododomain
+          domainHome: /u01/domains/tododomain
+          auxiliaryImageVolumes:
+            - name: auxiliaryImageVolume1
+              mountPath: /auxiliary
+          image: container-registry.oracle.com/middleware/weblogic:12.2.1.4
+          imagePullSecrets:
+            - name: tododomain-repo-credentials
+          domainHomeSourceType: "FromModel"
+          includeServerOutInPodLog: true
+          replicas: 1
+          webLogicCredentialsSecret:
+            name: tododomain-weblogic-credentials
+          configuration:
+            introspectorJobActiveDeadlineSeconds: 900
+            model:
+              configMap: tododomain-jdbc-config
+              domainType: WLS
+              modelHome: /auxiliary/models
+              wdtInstallHome: /auxiliary/weblogic-deploy
+              runtimeEncryptionSecret: tododomain-runtime-encrypt-secret
+            secrets:
+              - tododomain-jdbc-tododb
+          serverPod:
+            labels:
+              app: todo-domain
+              version: v1
+            auxiliaryImages:
+                - image: container-registry.oracle.com/verrazzano/example-todo:20211129200415-ae4e89e
+                  volume: auxiliaryImageVolume1
+            env:
+              - name: JAVA_OPTIONS
+                value: "-Dweblogic.StdoutDebugEnabled=false"
+              - name: USER_MEM_ARGS
+                value: "-Djava.security.egd=file:/dev/./urandom -Xms64m -Xmx256m "
+              - name: WL_HOME
+                value: /u01/oracle/wlserver
+              - name: MW_HOME
+                value: /u01/oracle
+---
+apiVersion: core.oam.dev/v1alpha2
+kind: Component
+metadata:
+  name: todo-jdbc-configmap
+spec:
+  workload:
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: tododomain-jdbc-config
+    data:
+      wdt_jdbc.yaml: |
+        resources:
+          JDBCSystemResource:
+            'ToDo-Datasource':
+              Target: 'AdminServer'
+              JdbcResource:
+                DatasourceType: GENERIC
+                JDBCDataSourceParams:
+                  GlobalTransactionsProtocol: OnePhaseCommit
+                  JNDIName: jdbc/ToDoDB
+                JDBCConnectionPoolParams:
+                  ConnectionCreationRetryFrequencySeconds: 5
+                  ConnectionReserveTimeoutSeconds: 10
+                  InitialCapacity: 0
+                  InactiveConnectionTimeoutSeconds: 60
+                  MaxCapacity: 5
+                  MinCapacity: 0
+                  TestConnectionsOnReserve: true
+                  TestFrequencySeconds: 10
+                JDBCDriverParams:
+                  # for MySQL, the last element in the URL is the database name, and must match the name inside the DB server
+                  URL: "jdbc:mysql://mysql:3306/tododb"
+                  PasswordEncrypted: '@@SECRET:tododomain-jdbc-tododb:password@@'
+                  DriverName: com.mysql.cj.jdbc.Driver
+                  Properties:
+                    user:
+                      Value: '@@SECRET:tododomain-jdbc-tododb:username@@'
+---
+apiVersion: core.oam.dev/v1alpha2
+kind: Component
+metadata:
+  name: todo-mysql-configmap
+spec:
+  workload:
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: mysql-initdb-config
+    data:
+      initdb.sql: |
+        create table `ToDos` (
+            `taskId` int not null auto_increment,
+            `task` varchar(200) not null,
+            `completed` boolean,
+            constraint todo_pk primary key (`taskId`)
+        );
+---
+apiVersion: core.oam.dev/v1alpha2
+kind: Component
+metadata:
+  name: todo-mysql-service
+spec:
+  workload:
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: mysql
+    spec:
+      ports:
+        - port: 3306
+      selector:
+        app: todo-mysql
+      clusterIP: None
+---
+apiVersion: core.oam.dev/v1alpha2
+kind: Component
+metadata:
+  name: todo-mysql-deployment
+spec:
+  workload:
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: mysql
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: todo-mysql
+      template:
+        metadata:
+          labels:
+            app: todo-mysql
+            version: v1
+        spec:
+          containers:
+            - env:
+                - name: MYSQL_ROOT_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: tododomain-jdbc-tododb
+                      key: password
+                - name: MYSQL_USER
+                  valueFrom:
+                    secretKeyRef:
+                      name: tododomain-jdbc-tododb
+                      key: username
+                - name: MYSQL_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: tododomain-jdbc-tododb
+                      key: password
+                - name: MYSQL_DATABASE
+                  value: tododb
+              image: ghcr.io/verrazzano/mysql:8.0.28
+              imagePullPolicy: IfNotPresent
+              name: mysql
+              ports:
+                - containerPort: 3306
+                  name: mysql
+                  protocol: TCP
+              volumeMounts:
+                - mountPath: /docker-entrypoint-initdb.d
+                  name: mysql-initdb
+          imagePullSecrets:
+            - name: ocr
+          volumes:
+            - configMap:
+                defaultMode: 420
+                name: mysql-initdb-config
+              name: mysql-initdb

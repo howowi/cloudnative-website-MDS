@@ -1,0 +1,30 @@
+apiVersion: core.oam.dev/v1alpha2
+kind: ApplicationConfiguration
+metadata:
+  name: todo-appconf
+  annotations:
+    version: v1.0.0
+    description: "ToDo List example application"
+spec:
+  components:
+    - componentName: todo-domain
+      traits:
+        - trait:
+            apiVersion: oam.verrazzano.io/v1alpha1
+            kind: MetricsTrait
+            spec:
+              scraper: verrazzano-system/vmi-system-prometheus-0
+        - trait:
+            apiVersion: oam.verrazzano.io/v1alpha1
+            kind: IngressTrait
+            metadata:
+              name: todo-domain-ingress
+            spec:
+              rules:
+                - paths:
+                    - path: "/todo"
+                      pathType: Prefix
+    - componentName: todo-jdbc-configmap
+    - componentName: todo-mysql-configmap
+    - componentName: todo-mysql-service
+    - componentName: todo-mysql-deployment
