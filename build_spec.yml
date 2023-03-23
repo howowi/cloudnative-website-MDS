@@ -29,7 +29,7 @@ steps:
       # docker build -t lhr.ocir.io/apaccpt01/php-webapp-mds:${BUILDRUN_HASH} php/.
       # echo "Run PHP"
       echo "Login to OCIR"
-      docker login lhr.ocir.io -u apaccpt01/howie_iam -p ${OCIRCRED}
+      docker login lhr.ocir.io -u apaccpt01/oracleidentitycloudservice/howie.owi@oracle.com -p ${OCIRCRED}
       docker run -dit -p 9000:9000 --name php lhr.ocir.io/apaccpt01/php-webapp-mds:arik3za
       echo "Run php-webapp successfully"
     onFailure:
@@ -86,7 +86,7 @@ steps:
     name: "Push Nginx and PHP Docker Image to OCIR"
     command: |
       echo "Login to OCIR"
-      docker login lhr.ocir.io -u apaccpt01/howie_iam -p ${OCIRCRED}
+      docker login lhr.ocir.io -u apaccpt01/oracleidentitycloudservice/howie.owi@oracle.com -p ${OCIRCRED}
       echo "Push Nginx image to OCIR"
       docker push lhr.ocir.io/apaccpt01/nginx-php-mds:${BUILDRUN_HASH}
       # echo "Push PHP image to OCIR"
