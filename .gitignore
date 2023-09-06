@@ -1,2 +1,3 @@
 # Ignore all secrets
 secret*
+.DS*
